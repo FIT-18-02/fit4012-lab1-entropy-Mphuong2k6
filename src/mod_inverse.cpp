@@ -26,6 +26,8 @@ int extended_euclid(int a, int b, int &x, int &y) {
 }
 
 int mod_inverse(int a, int m) {
+    a = a % m; // chuẩn hóa a trước
+
     int x = 0, y = 0;
     int g = extended_euclid(a, m, x, y);
 
@@ -33,7 +35,10 @@ int mod_inverse(int a, int m) {
         return -1;
     }
 
-    return (x % m + m) % m;
+    // đưa x về dạng dương
+    x = (x % m + m) % m;
+
+    return x;
 }
 
 int main() {
