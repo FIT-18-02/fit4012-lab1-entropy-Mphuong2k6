@@ -24,11 +24,15 @@ double calculate_entropy(const string &text) {
 }
 
 double calculate_redundancy(const string &text, int alphabet_size = 256) {
-    (void)text;
-    (void)alphabet_size;
-    return -1.0;
-}
+    if (text.empty() || alphabet_size <= 1) {
+        return 0.0;
+    }
 
+    double entropy = calculate_entropy(text);
+    double max_entropy = log2(alphabet_size);
+
+    return 1.0 - (entropy / max_entropy);
+}
 int main() {
     string input;
     cout << "Enter a string of characters: ";
